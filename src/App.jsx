@@ -5,14 +5,14 @@ function App() {
   return (
     <>
       <nav>
-        <h2>Mini Commerce</h2>
+        <h1>Mini Commerce</h1>
 
         <div class="cart-notification">
           <ion-icon name="cart-outline" class="cart-icon"></ion-icon>
           <div class="cart-content-number">0</div>
         </div>
       </nav>
-      <section></section>
+      <section class="section"></section>
     </>
   );
 }
