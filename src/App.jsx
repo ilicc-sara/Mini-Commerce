@@ -13,7 +13,7 @@ function App() {
         </div>
       </nav>
       <section class="section">
-        <div class="products-cont">
+        <div class="products-cont ">
           <label class="search-label">Search Product</label> <br></br>
           <input type="text" class="input-product" />
           <div class="products-list">
@@ -35,7 +35,29 @@ function App() {
           <button class="go-to-cart-btn">Go to Your cart</button>
           <div class="total-price">
             <h4>Total Price:</h4>
-            <span>$12345</span>
+            <span>$999.99</span>
+          </div>
+        </div>
+
+        <div class="cart-cont hidden">
+          <div class="cart-list">
+            <article class="cart-item">
+              <div class="cart-item-info">
+                <h4>Sushi</h4>
+                <p>Finest fish and veggies</p>
+                <span>22.99$</span>
+              </div>
+              <div class="cart-item-amount">
+                <button>–</button>
+                <span>1</span>
+                <button>+</button>
+              </div>
+            </article>
+          </div>
+          <button class="go-to-products-btn">Back to Products</button>
+          <div class="total-price">
+            <h4>Total Price:</h4>
+            <span>$999.99</span>
           </div>
         </div>
       </section>
