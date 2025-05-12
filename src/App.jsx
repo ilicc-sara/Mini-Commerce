@@ -1,5 +1,7 @@
 import { useState } from "react";
 import "./App.css";
+import Product from "./Product.jsx";
+import CartProduct from "./CartProduct.jsx";
 
 const info = [
   {
@@ -26,6 +28,10 @@ const info = [
 
 function App() {
   const [products, setProducts] = useState(info);
+  const [cartProducts, setCartProducts] = useState(info);
+
+  const [productsOverview, setProductsOverview] = useState(true);
+
   return (
     <>
       <nav>
@@ -37,53 +43,57 @@ function App() {
         </div>
       </nav>
       <section class="section">
-        <div class="products-cont ">
-          <label class="search-label">Search Product</label> <br></br>
-          <input type="text" class="input-product" />
-          <div class="products-list">
-            <article class="product-item">
-              <div class="product-info">
-                <h4>Sushi</h4>
-                <p>Finest fish and veggies</p>
-                <span>22.99$</span>
-              </div>
-              <div class="product-amount">
-                <div class="input-amount-cont">
-                  <label>Amount</label>
-                  <input class="input-amount" type="number" value="1" />
-                </div>
-                <button class="add-btn">ADD +</button>
-              </div>
-            </article>
+        {productsOverview && (
+          <div class="products-cont">
+            <label class="search-label">Search Product</label> <br></br>
+            <input type="text" class="input-product" />
+            <div class="products-list">
+              {products.map((product, index) => (
+                <Product
+                  key={index}
+                  name={product.name}
+                  description={product.description}
+                  price={product.price}
+                />
+              ))}
+            </div>
+            <button
+              class="go-to-cart-btn"
+              onClick={() => setProductsOverview(false)}
+            >
+              Go to Your cart
+            </button>
+            <div class="total-price">
+              <h4>Total Price:</h4>
+              <span>$999.99</span>
+            </div>
           </div>
-          <button class="go-to-cart-btn">Go to Your cart</button>
-          <div class="total-price">
-            <h4>Total Price:</h4>
-            <span>$999.99</span>
-          </div>
-        </div>
+        )}
 
-        <div class="cart-cont hidden">
-          <div class="cart-list">
-            <article class="cart-item">
-              <div class="cart-item-info">
-                <h4>Sushi</h4>
-                <p>Finest fish and veggies</p>
-                <span>22.99$</span>
-              </div>
-              <div class="cart-item-amount">
-                <button>–</button>
-                <span>1</span>
-                <button>+</button>
-              </div>
-            </article>
+        {!productsOverview && (
+          <div class="cart-cont">
+            <div class="cart-list">
+              {cartProducts.map((cartProduct, index) => (
+                <CartProduct
+                  key={index}
+                  name={cartProduct.name}
+                  description={cartProduct.description}
+                  price={cartProduct.price}
+                />
+              ))}
+            </div>
+            <button
+              class="go-to-products-btn"
+              onClick={() => setProductsOverview(true)}
+            >
+              Back to Products
+            </button>
+            <div class="total-price">
+              <h4>Total Price:</h4>
+              <span>$999.99</span>
+            </div>
           </div>
-          <button class="go-to-products-btn">Back to Products</button>
-          <div class="total-price">
-            <h4>Total Price:</h4>
-            <span>$999.99</span>
-          </div>
-        </div>
+        )}
       </section>
     </>
   );
