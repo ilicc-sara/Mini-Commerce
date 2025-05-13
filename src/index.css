@@ -157,6 +157,7 @@ nav {
 
 .cart-cont {
   position: relative;
+  margin: 10vh auto;
 }
 
 .cart-list {
@@ -185,6 +186,7 @@ nav {
   text-align: start;
   padding: 10px 20px;
   border-bottom: 0.5px solid #24242429;
+  position: relative;
 }
 
 .cart-item-amount {
@@ -206,6 +208,16 @@ nav {
   font-weight: 500;
   border-radius: 10px;
 }
+
+#delete-icon {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  cursor: pointer;
+}
+
 .go-to-products-btn {
   font-size: 20px;
   font-weight: 500;

@@ -2,7 +2,7 @@ import React from "react";
 
 function CartProduct(props) {
   // prettier-ignore
-  const { name, description, price, id, findItemAmount, increaseAmount, decreseAmount } = props;
+  const { name, description, price, id, findItemAmount, increaseAmount, decreseAmount, deleteCartItem } = props;
 
   const itemAmount = findItemAmount(id);
   return (
@@ -17,6 +17,8 @@ function CartProduct(props) {
         <span> {itemAmount} </span>
         <button onClick={() => increaseAmount(id)}>+</button>
       </div>
+      {/* prettier-ignore */}
+      <ion-icon onClick={() => deleteCartItem(id)} name="close-circle" id="delete-icon"></ion-icon>
     </article>
   );
 }

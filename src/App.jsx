@@ -36,6 +36,8 @@ function App() {
 
   const [productsOverview, setProductsOverview] = useState(true);
 
+  const cartIsEmpty = cartProducts.length === 0;
+
   const totalAmount = cartProducts.reduce((acc, cur) => {
     return acc + Number(cur.amount);
   }, 0);
@@ -72,6 +74,12 @@ function App() {
         )
       );
     }
+  }
+
+  function deleteCartItem(id) {
+    setCartProducts((previous) =>
+      previous.filter((cartProduct) => cartProduct.id !== id)
+    );
   }
 
   return (
@@ -114,17 +122,21 @@ function App() {
 
         {!productsOverview && (
           <div className="cart-cont">
-            <div className="cart-list">
-              {cartProducts.map((cartProduct, index) => (
-                <CartProduct
-                  key={index}
-                  {...cartProduct}
-                  findItemAmount={findItemAmount}
-                  increaseAmount={increaseAmount}
-                  decreseAmount={decreseAmount}
-                />
-              ))}
-            </div>
+            {!cartIsEmpty && (
+              <div className="cart-list">
+                {cartProducts.map((cartProduct, index) => (
+                  <CartProduct
+                    key={index}
+                    {...cartProduct}
+                    findItemAmount={findItemAmount}
+                    increaseAmount={increaseAmount}
+                    decreseAmount={decreseAmount}
+                    deleteCartItem={deleteCartItem}
+                  />
+                ))}
+              </div>
+            )}
+            {cartIsEmpty && <h1>Your cart is empty...</h1>}
             <button
               className="go-to-products-btn"
               onClick={() => setProductsOverview(true)}
