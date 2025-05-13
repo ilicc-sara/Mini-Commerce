@@ -36,8 +36,6 @@ function App() {
 
   const [productsOverview, setProductsOverview] = useState(true);
 
-  console.log(cartProducts);
-
   const totalAmount = cartProducts.reduce((acc, cur) => {
     return acc + Number(cur.amount);
   }, 0);
@@ -95,11 +93,7 @@ function App() {
               {products.map((product, index) => (
                 <Product
                   key={index}
-                  name={product.name}
-                  description={product.description}
-                  price={product.price}
-                  id={product.id}
-                  setProducts={setProducts}
+                  {...product}
                   setCartProducts={setCartProducts}
                   getIsProductInCart={getIsProductInCart}
                 />
@@ -124,10 +118,7 @@ function App() {
               {cartProducts.map((cartProduct, index) => (
                 <CartProduct
                   key={index}
-                  name={cartProduct.name}
-                  description={cartProduct.description}
-                  price={cartProduct.price}
-                  id={cartProduct.id}
+                  {...cartProduct}
                   findItemAmount={findItemAmount}
                   increaseAmount={increaseAmount}
                   decreseAmount={decreseAmount}

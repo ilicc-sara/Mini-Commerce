@@ -3,12 +3,7 @@ import CartProduct from "./CartProduct";
 
 function Product(props) {
   // prettier-ignore
-  const { name, description, price, id, setProducts, cartProducts, setCartProducts, getIsProductInCart } = props;
-
-  // function createCartItem() {
-  //   const inputAmount = document.getElementById("input-amount").value;
-  //   console.log(inputAmount);
-  // }
+  const { name, description, price, id, setCartProducts, getIsProductInCart } = props;
 
   const [amount, setAmount] = useState(1);
 
