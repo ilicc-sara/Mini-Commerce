@@ -1,15 +1,15 @@
 import React from "react";
 
 function CartProduct(props) {
-  const { name, description, price } = props;
+  const { name, description, price, id } = props;
   return (
-    <article class="cart-item">
-      <div class="cart-item-info">
+    <article className="cart-item">
+      <div className="cart-item-info">
         <h4> {name} </h4>
         <p> {description} </p>
         <span> {price}$</span>
       </div>
-      <div class="cart-item-amount">
+      <div className="cart-item-amount">
         <button>–</button>
         <span>1</span>
         <button>+</button>

@@ -8,27 +8,31 @@ const info = [
     name: "Sushi",
     description: "Finest fish and veggies",
     price: 22.99,
+    id: 1,
   },
   {
     name: "Schnitzel",
     description: "A german specialty!",
     price: 16.5,
+    id: 2,
   },
   {
     name: "Barbecue Burger",
     description: "American, raw, meaty",
     price: 12.99,
+    id: 3,
   },
   {
     name: "Green Bowl",
     description: "Healthy...and green...",
     price: 18.99,
+    id: 4,
   },
 ];
 
 function App() {
   const [products, setProducts] = useState(info);
-  const [cartProducts, setCartProducts] = useState(info);
+  const [cartProducts, setCartProducts] = useState([]);
 
   const [productsOverview, setProductsOverview] = useState(true);
 
@@ -37,33 +41,36 @@ function App() {
       <nav>
         <h1>Mini Commerce</h1>
 
-        <div class="cart-notification">
-          <ion-icon name="cart-outline" class="cart-icon"></ion-icon>
-          <div class="cart-content-number">0</div>
+        <div className="cart-notification">
+          <ion-icon name="cart-outline" className="cart-icon"></ion-icon>
+          <div className="cart-content-number">0</div>
         </div>
       </nav>
-      <section class="section">
+      <section className="section">
         {productsOverview && (
-          <div class="products-cont">
-            <label class="search-label">Search Product</label> <br></br>
-            <input type="text" class="input-product" />
-            <div class="products-list">
+          <div className="products-cont">
+            <label className="search-label">Search Product</label> <br></br>
+            <input type="text" className="input-product" />
+            <div className="products-list">
               {products.map((product, index) => (
                 <Product
                   key={index}
                   name={product.name}
                   description={product.description}
                   price={product.price}
+                  id={product.id}
+                  setProducts={setProducts}
+                  setCartProducts={setCartProducts}
                 />
               ))}
             </div>
             <button
-              class="go-to-cart-btn"
+              className="go-to-cart-btn"
               onClick={() => setProductsOverview(false)}
             >
               Go to Your cart
             </button>
-            <div class="total-price">
+            <div className="total-price">
               <h4>Total Price:</h4>
               <span>$999.99</span>
             </div>
@@ -71,24 +78,25 @@ function App() {
         )}
 
         {!productsOverview && (
-          <div class="cart-cont">
-            <div class="cart-list">
+          <div className="cart-cont">
+            <div className="cart-list">
               {cartProducts.map((cartProduct, index) => (
                 <CartProduct
                   key={index}
                   name={cartProduct.name}
                   description={cartProduct.description}
                   price={cartProduct.price}
+                  id={cartProduct.id}
                 />
               ))}
             </div>
             <button
-              class="go-to-products-btn"
+              className="go-to-products-btn"
               onClick={() => setProductsOverview(true)}
             >
               Back to Products
             </button>
-            <div class="total-price">
+            <div className="total-price">
               <h4>Total Price:</h4>
               <span>$999.99</span>
             </div>
