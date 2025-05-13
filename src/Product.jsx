@@ -1,7 +1,9 @@
 import { React, useState } from "react";
+import CartProduct from "./CartProduct";
 
 function Product(props) {
-  const { name, description, price, id, setProducts, setCartProducts } = props;
+  // prettier-ignore
+  const { name, description, price, id, setProducts, cartProducts, setCartProducts, getIsProductInCart } = props;
 
   // function createCartItem() {
   //   const inputAmount = document.getElementById("input-amount").value;
@@ -10,6 +12,8 @@ function Product(props) {
 
   const [amount, setAmount] = useState(1);
 
+  const isProductInCart = getIsProductInCart(id);
+
   function handleAmountChange(event) {
     setAmount(event.target.value);
   }
@@ -17,16 +21,30 @@ function Product(props) {
   function handleSubmit(e) {
     e.preventDefault();
 
-    setCartProducts((previous) => [
-      ...previous,
-      {
-        name: name,
-        description: description,
-        price: price,
-        id: id,
-        amount: amount,
-      },
-    ]);
+    if (!isProductInCart) {
+      setCartProducts((previous) => [
+        ...previous,
+        {
+          name: name,
+          description: description,
+          price: price,
+          id: id,
+          amount: amount,
+        },
+      ]);
+    }
+
+    if (isProductInCart) {
+      setCartProducts((previous) =>
+        previous.map((item) =>
+          item.id === id
+            ? { ...item, amount: Number(item.amount) + Number(amount) }
+            : item
+        )
+      );
+    }
+
+    setAmount(1);
   }
 
   return (

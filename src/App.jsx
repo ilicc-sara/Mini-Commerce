@@ -52,10 +52,16 @@ function App() {
     return cartProducts.find((item) => item?.id === id)?.amount;
   }
 
+  function getIsProductInCart(id) {
+    return cartProducts.includes(
+      cartProducts.find((cartProduct) => cartProduct.id === id)
+    );
+  }
+
   function increaseAmount(id) {
     setCartProducts((previous) =>
       previous.map((item) =>
-        item.id === id ? { ...item, amount: item.amount + 1 } : item
+        item.id === id ? { ...item, amount: Number(item.amount) + 1 } : item
       )
     );
   }
@@ -64,7 +70,7 @@ function App() {
     if (Number(amount) !== 1) {
       setCartProducts((previous) =>
         previous.map((item) =>
-          item.id === id ? { ...item, amount: item.amount - 1 } : item
+          item.id === id ? { ...item, amount: Number(item.amount) - 1 } : item
         )
       );
     }
@@ -95,6 +101,7 @@ function App() {
                   id={product.id}
                   setProducts={setProducts}
                   setCartProducts={setCartProducts}
+                  getIsProductInCart={getIsProductInCart}
                 />
               ))}
             </div>

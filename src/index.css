@@ -189,12 +189,12 @@ nav {
 
 .cart-item-amount {
   display: flex;
-  gap: 15px;
+  /* gap: 15px; */
   justify-content: space-between;
   align-items: center;
   font-size: 20px;
   font-weight: 500;
-  width: 130px;
+  width: 120px;
 }
 
 .cart-item-amount button {
