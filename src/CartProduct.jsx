@@ -1,7 +1,10 @@
 import React from "react";
 
 function CartProduct(props) {
-  const { name, description, price, id } = props;
+  // prettier-ignore
+  const { name, description, price, id, findItemAmount, increaseAmount, decreseAmount } = props;
+
+  const itemAmount = findItemAmount(id);
   return (
     <article className="cart-item">
       <div className="cart-item-info">
@@ -10,9 +13,9 @@ function CartProduct(props) {
         <span> {price}$</span>
       </div>
       <div className="cart-item-amount">
-        <button>–</button>
-        <span>1</span>
-        <button>+</button>
+        <button onClick={() => decreseAmount(id, itemAmount)}>–</button>
+        <span> {itemAmount} </span>
+        <button onClick={() => increaseAmount(id)}>+</button>
       </div>
     </article>
   );

@@ -36,6 +36,40 @@ function App() {
 
   const [productsOverview, setProductsOverview] = useState(true);
 
+  console.log(cartProducts);
+
+  const totalAmount = cartProducts.reduce((acc, cur) => {
+    return acc + Number(cur.amount);
+  }, 0);
+
+  const totalPrice = cartProducts
+    .reduce((acc, cur) => {
+      return acc + cur.price * Number(cur.amount);
+    }, 0)
+    .toFixed(2);
+
+  function findItemAmount(id) {
+    return cartProducts.find((item) => item?.id === id)?.amount;
+  }
+
+  function increaseAmount(id) {
+    setCartProducts((previous) =>
+      previous.map((item) =>
+        item.id === id ? { ...item, amount: item.amount + 1 } : item
+      )
+    );
+  }
+
+  function decreseAmount(id, amount) {
+    if (Number(amount) !== 1) {
+      setCartProducts((previous) =>
+        previous.map((item) =>
+          item.id === id ? { ...item, amount: item.amount - 1 } : item
+        )
+      );
+    }
+  }
+
   return (
     <>
       <nav>
@@ -43,7 +77,7 @@ function App() {
 
         <div className="cart-notification">
           <ion-icon name="cart-outline" className="cart-icon"></ion-icon>
-          <div className="cart-content-number">0</div>
+          <div className="cart-content-number"> {totalAmount} </div>
         </div>
       </nav>
       <section className="section">
@@ -72,7 +106,7 @@ function App() {
             </button>
             <div className="total-price">
               <h4>Total Price:</h4>
-              <span>$999.99</span>
+              <span>{totalPrice}$</span>
             </div>
           </div>
         )}
@@ -87,6 +121,9 @@ function App() {
                   description={cartProduct.description}
                   price={cartProduct.price}
                   id={cartProduct.id}
+                  findItemAmount={findItemAmount}
+                  increaseAmount={increaseAmount}
+                  decreseAmount={decreseAmount}
                 />
               ))}
             </div>
@@ -98,7 +135,7 @@ function App() {
             </button>
             <div className="total-price">
               <h4>Total Price:</h4>
-              <span>$999.99</span>
+              <span>{totalPrice}$</span>
             </div>
           </div>
         )}

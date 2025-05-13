@@ -16,7 +16,17 @@ function Product(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(amount);
+
+    setCartProducts((previous) => [
+      ...previous,
+      {
+        name: name,
+        description: description,
+        price: price,
+        id: id,
+        amount: amount,
+      },
+    ]);
   }
 
   return (
@@ -24,7 +34,7 @@ function Product(props) {
       <div className="product-info">
         <h4>{name}</h4>
         <p> {description} </p>
-        <span> {price} $</span>
+        <span> {price.toFixed(2)} $</span>
       </div>
       <form className="product-amount" onSubmit={handleSubmit}>
         <div className="input-amount-cont">

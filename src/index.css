@@ -194,6 +194,7 @@ nav {
   align-items: center;
   font-size: 20px;
   font-weight: 500;
+  width: 130px;
 }
 
 .cart-item-amount button {
