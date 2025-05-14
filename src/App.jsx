@@ -33,10 +33,15 @@ const info = [
 function App() {
   const [products, setProducts] = useState(info);
   const [cartProducts, setCartProducts] = useState([]);
-
   const [productsOverview, setProductsOverview] = useState(true);
+  const [input, setInput] = useState("");
 
   const cartIsEmpty = cartProducts.length === 0;
+
+  function handleInputChange(event) {
+    setInput(event.target.value);
+    console.log(event);
+  }
 
   const totalAmount = cartProducts.reduce((acc, cur) => {
     return acc + Number(cur.amount);
@@ -95,8 +100,18 @@ function App() {
       <section className="section">
         {productsOverview && (
           <div className="products-cont">
-            <label className="search-label">Search Product</label> <br></br>
-            <input type="text" className="input-product" />
+            <form>
+              <label
+                className="search-label"
+                value={input}
+                onChange={handleInputChange}
+              >
+                Search Product
+              </label>{" "}
+              <br></br>
+              <input type="text" className="input-product" />
+              <button className="hidden"></button>
+            </form>
             <div className="products-list">
               {products.map((product, index) => (
                 <Product
