@@ -40,7 +40,14 @@ function App() {
 
   function handleInputChange(event) {
     setInput(event.target.value);
-    console.log(event);
+
+    if (input !== "") {
+      setProducts((prev) =>
+        prev.filter((product) =>
+          product.name.toLowerCase().includes(input.toLowerCase())
+        )
+      );
+    }
   }
 
   const totalAmount = cartProducts.reduce((acc, cur) => {
@@ -100,18 +107,14 @@ function App() {
       <section className="section">
         {productsOverview && (
           <div className="products-cont">
-            <form>
-              <label
-                className="search-label"
-                value={input}
-                onChange={handleInputChange}
-              >
-                Search Product
-              </label>{" "}
-              <br></br>
-              <input type="text" className="input-product" />
-              <button className="hidden"></button>
-            </form>
+            <label className="search-label">Search Product</label> <br></br>
+            <input
+              type="text"
+              className="input-product"
+              value={input}
+              onChange={handleInputChange}
+            />
+            {/* <button className="hidden"></button> */}
             <div className="products-list">
               {products.map((product, index) => (
                 <Product
