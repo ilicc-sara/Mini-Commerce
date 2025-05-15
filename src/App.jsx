@@ -38,18 +38,6 @@ function App() {
 
   const cartIsEmpty = cartProducts.length === 0;
 
-  function handleInputChange(event) {
-    setInput(event.target.value);
-
-    if (input !== "") {
-      setProducts((prev) =>
-        prev.filter((product) =>
-          product.name.toLowerCase().includes(input.toLowerCase())
-        )
-      );
-    }
-  }
-
   const totalAmount = cartProducts.reduce((acc, cur) => {
     return acc + Number(cur.amount);
   }, 0);
@@ -68,6 +56,34 @@ function App() {
     return cartProducts.includes(
       cartProducts.find((cartProduct) => cartProduct.id === id)
     );
+  }
+
+  function handleInputChange(event) {
+    setInput(event.target.value);
+
+    const filteredInfo = products.filter((product) =>
+      product.name.toLowerCase().includes(input.toLowerCase())
+    );
+
+    // setProducts((prev) =>
+    //   prev.filter((product) =>
+    //     product.name.toLowerCase().includes(input.toLowerCase())
+    //   )
+    // );
+
+    setProducts(filteredInfo);
+
+    // useEffect(() => {
+    //   setProducts(info);
+    //   return () => {
+    //     if (input !== "")
+    //       setProducts((prev) =>
+    //         prev.filter((product) =>
+    //           product.name.toLowerCase().includes(input.toLowerCase())
+    //         )
+    //       );
+    //   };
+    // }, [input]);
   }
 
   function increaseAmount(id) {
@@ -114,7 +130,6 @@ function App() {
               value={input}
               onChange={handleInputChange}
             />
-            {/* <button className="hidden"></button> */}
             <div className="products-list">
               {products.map((product, index) => (
                 <Product
@@ -133,7 +148,7 @@ function App() {
             </button>
             <div className="total-price">
               <h4>Total Price:</h4>
-              <span>{totalPrice}$</span>
+              <span>{totalPrice} $</span>
             </div>
           </div>
         )}
@@ -163,7 +178,7 @@ function App() {
             </button>
             <div className="total-price">
               <h4>Total Price:</h4>
-              <span>{totalPrice}$</span>
+              <span>{totalPrice} $</span>
             </div>
           </div>
         )}

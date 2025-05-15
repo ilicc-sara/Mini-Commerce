@@ -1,5 +1,4 @@
-import { React, useState } from "react";
-import CartProduct from "./CartProduct";
+import { React, useEffect, useState } from "react";
 
 function Product(props) {
   // prettier-ignore
@@ -11,7 +10,6 @@ function Product(props) {
 
   function handleAmountChange(event) {
     setAmount(event.target.value);
-    console.log(amount);
   }
 
   function handleSubmit(e) {

@@ -10,7 +10,7 @@ function CartProduct(props) {
       <div className="cart-item-info">
         <h4> {name} </h4>
         <p> {description} </p>
-        <span> {price}$</span>
+        <span> {price} $</span>
       </div>
       <div className="cart-item-amount">
         <button onClick={() => decreseAmount(id, itemAmount)}>–</button>
