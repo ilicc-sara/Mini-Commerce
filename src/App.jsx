@@ -42,6 +42,10 @@ function App() {
     return acc + Number(cur.amount);
   }, 0);
 
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(input.toLowerCase())
+  );
+
   const totalPrice = cartProducts
     .reduce((acc, cur) => {
       return acc + cur.price * Number(cur.amount);
@@ -58,33 +62,16 @@ function App() {
     );
   }
 
-  function handleInputChange(event) {
-    setInput(event.target.value);
+  // function handleInputChange(event) {
+  //   setInput(event.target.value);
+  //   console.log(input);
 
-    const filteredInfo = products.filter((product) =>
-      product.name.toLowerCase().includes(input.toLowerCase())
-    );
+  //   const filteredProducts = products.filter((product) =>
+  //     product.name.toLowerCase().includes(input.toLowerCase())
+  //   );
 
-    // setProducts((prev) =>
-    //   prev.filter((product) =>
-    //     product.name.toLowerCase().includes(input.toLowerCase())
-    //   )
-    // );
-
-    setProducts(filteredInfo);
-
-    // useEffect(() => {
-    //   setProducts(info);
-    //   return () => {
-    //     if (input !== "")
-    //       setProducts((prev) =>
-    //         prev.filter((product) =>
-    //           product.name.toLowerCase().includes(input.toLowerCase())
-    //         )
-    //       );
-    //   };
-    // }, [input]);
-  }
+  //   setProducts(filteredProducts);
+  // }
 
   function increaseAmount(id) {
     setCartProducts((previous) =>
@@ -128,10 +115,10 @@ function App() {
               type="text"
               className="input-product"
               value={input}
-              onChange={handleInputChange}
+              onChange={(e) => setInput(e.target.value)}
             />
             <div className="products-list">
-              {products.map((product, index) => (
+              {filteredProducts.map((product, index) => (
                 <Product
                   key={index}
                   {...product}

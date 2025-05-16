@@ -10,6 +10,7 @@ function Product(props) {
 
   function handleAmountChange(event) {
     setAmount(event.target.value);
+    console.log(amount);
   }
 
   function handleSubmit(e) {
